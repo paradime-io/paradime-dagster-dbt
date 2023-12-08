@@ -69,3 +69,39 @@ The docs for `dagster-dbt` repo can be found
    ```
 
 7. Finally, open the Dagster UI: [http://127.0.0.1:3000](http://127.0.0.1:3000)
+
+# Cloud Deployment
+
+Ensure that you update the `setup.py` by adding the `paradime-dagster-dbt` python package to the `install_requires` list. For example:
+```python
+setup(
+    name="paradime_dagster_demo",
+    packages=find_packages(exclude=["paradime_dagster_demo_tests"]),
+    install_requires=[
+        "dagster-dbt @ git+https://github.com/paradime-io/paradime-dagster-dbt.git@1.5.9#egg=dagster_dbt",
+        "dagster==1.5.9",
+        "dagster-cloud==1.5.9",
+    ],
+    extras_require={"dev": ["dagster-webserver", "pytest"]},
+)
+```
+
+You also need to [setup your environment variables](https://docs.dagster.io/guides/dagster/using-environment-variables-and-secrets) in dagster.
+
+
+## Serverless
+You will need to have a `dagster_cloud.yaml` file. Something like this inside the `paradime-dagster-demo` directory:
+```yaml
+locations:
+  - location_name: paradime-dagster-demo
+    code_source:
+      package_name: paradime_dagster_demo
+```
+
+After setting up the [dagster-cloud cli](https://docs.dagster.io/dagster-cloud/managing-deployments/dagster-cloud-cli). You can then run a serveless deploy by running this inside the `paradime-dagster-demo` directory:
+```shell
+$ dagster-cloud serverless deploy \
+  --location-name=paradime-dagster-demo \
+  --location-file dagster_cloud.yaml \
+  --base-image python:3.8 # needed to install git
+```
