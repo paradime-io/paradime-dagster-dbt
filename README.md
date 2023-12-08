@@ -27,10 +27,10 @@ The docs for `dagster-dbt` repo can be found
    
 3. Set up your dagster project (if not already):
    ```
-   $ dagster project scaffold --name paradime-dagster
+   $ dagster project scaffold --name paradime-dagster-demo
    ```
 
-4. Set up the Paradime definitions in your dagster project in the `__init__.py` file (i.e `paradime-dagster/paradime_dagster/__init__.py`) as follows:
+4. Set up the Paradime definitions in your dagster project in the `__init__.py` file (i.e `paradime-dagster-demo/paradime_dagster-demo/__init__.py`) as follows:
    ```python
    import os
    from dagster import Definitions
@@ -46,7 +46,7 @@ The docs for `dagster-dbt` repo can be found
    
    paradime_assets = load_assets_from_paradime_schedule(
        paradime=paradime,
-       schedule_name="dagster",  # Your schedule name in paradime
+       schedule_name="daily_run",  # Your schedule name in paradime
    )
    
    defs = Definitions(
