@@ -160,6 +160,14 @@ class DbtParadimeCacheableAssetsDefinition(CacheableAssetsDefinition):
         if excluded_models:
             dbt_compile_options.append(f"--exclude {' '.join(excluded_models)}")
 
+        profile = parsed_args.profile
+        if profile:
+            dbt_compile_options.append(f"--profile {profile}")
+
+        target = parsed_args.target
+        if target:
+            dbt_compile_options.append(f"--target {target}")
+
         selector = getattr(parsed_args, "selector_name", None) or getattr(
             parsed_args, "selector", None
         )
