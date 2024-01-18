@@ -20,6 +20,8 @@ setup(
     author_email="hello@dagsterlabs.com",
     license="Apache-2.0",
     description="A Dagster integration for dbt",
+    long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
     url="https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-dbt",
     classifiers=[
         "Programming Language :: Python :: 3.8",
