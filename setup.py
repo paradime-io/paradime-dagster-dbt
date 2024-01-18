@@ -14,7 +14,7 @@ def get_version() -> str:
 
 ver = get_version()
 setup(
-    name="dagster-dbt",
+    name="paradime-dagster-dbt",
     version=ver,
     author="Dagster Labs",
     author_email="hello@dagsterlabs.com",
